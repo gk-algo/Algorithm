@@ -1,3 +1,5 @@
+#https://www.acmicpc.net/problem/1972
+
 while (1):
     l=input()
     if l=='*':
