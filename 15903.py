@@ -1,10 +1,9 @@
-def do(l):
-    l[0]=l[0]+l[1]
-    l[1]=l[0]
-    
+import heapq
 n,m=map(int, input().split())
 l=list(map(int, input().split()))
-l.sort()
-for x in range(m):
-    do(l)
+heapq.heapify(l)
+for _ in range(m):
+    tmp=heapq.heappop(l)+heapq.heappop(l)
+    heapq.heappush(l,tmp)
+    heapq.heappush(l,tmp)
 print(sum(l))
