@@ -16,4 +16,3 @@ for x in l[:4]:
             result.append(tmp1)
 result.sort()
 print(result[2])
-
