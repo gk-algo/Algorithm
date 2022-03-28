@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/13414
 import sys
 input=sys.stdin.readline
 d=[]
@@ -13,5 +14,9 @@ while d:
     if check.get(tmp)!=1:
          stack.append(tmp)
          check[tmp]=1
-for _ in range(k):
-    print(stack.pop())
+if len(stack)<k:
+    for _ in range(len(stack)):
+        print(stack.pop())
+else:
+    for _ in range(k):
+        print(stack.pop())
