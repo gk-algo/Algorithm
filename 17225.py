@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/17225
 import heapq
 heap=[]
 tmpl=[]
