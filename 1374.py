@@ -1,12 +1,10 @@
 #https://www.acmicpc.net/problem/1374
 import sys
 import heapq
-from turtle import end_fill
 input=sys.stdin.readline
 n=int(input())
 lecture=[]
 q=[]
-vis=[0 for _ in range(100001)]
 for _ in range(n):
     l=list(map(int,input().split()))
     heapq.heappush(lecture,[l[1],l[2],l[0]])
