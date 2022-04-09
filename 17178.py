@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/17178
 import heapq
 from collections import deque
 n=int(input())
