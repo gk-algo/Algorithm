@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/2665
 from collections import deque
 def bfs(x,y):
     dx=[-1,1,0,0]
