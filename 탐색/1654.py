@@ -5,7 +5,7 @@ for _ in range(k):
     a.append(int(input()))
 a.sort()
 low=1
-top=min(a)
+top=max(a)
 while low<=top:
     mid=(low+top)//2
     cnt=0
