@@ -1,9 +1,15 @@
-t=int(input())
-for _ in range(t):
-    m=0
-    n=int(input())
-    l=list(map(int,input().split()))
-    l.sort(reverse=True)
-    for x in range(n-2):
-        m=max(m,abs(l[x]-l[x+2]))
-    print(m)
+l=[2,4,5,7,9]
+arr=[]
+stack=[]
+m=0
+for x in range(len(l)):
+    if x%2==0:
+        arr.append(l[x])
+for x in range(len(l)):
+    if x%2==1:
+        stack.append(l[x])
+while stack:
+    arr.append(stack.pop())
+for x in range(len(arr)-1):
+    m=max(m,abs(arr[x]-arr[x+1]))
+print(m)
