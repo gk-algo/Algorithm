@@ -3,6 +3,7 @@ u = set()
 ans=[]
 for i in range(n):
     u.add(int(input()))
+    
 sums = set()
 for i in u:
     for j in u:
