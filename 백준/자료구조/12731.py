@@ -1,56 +1,31 @@
 import heapq
 from collections import deque
 from tracemalloc import start
-def function_a(a,acount,asave,bsave):
-    now_a=heapq.heappop(a)
+def f(heap,count,save,op_save):
+    now_a=heapq.heappop(heap)
     start_hour,start_minutes=now_a[0].split(":")
     start_hour=int(start_hour)
     start_minutes=int(start_minutes)
-    if asave:
-        if start_hour<asave[0][0]:
-            acount+=1
-        elif start_hour==asave[0][0]:
-            if start_minutes<asave[0][1]:
-                acount+=1
+    if save:
+        if start_hour<save[0][0]:
+            count+=1
+        elif start_hour==save[0][0]:
+            if start_minutes<save[0][1]:
+                count+=1
             else:
-                heapq.heappop(asave)
+                heapq.heappop(save)
         else:
-            heapq.heappop(asave)
+            heapq.heappop(save)
     else:
-        acount+=1
+        count+=1
     hour, minutes=now_a[1].split(':')
     if int(minutes)+t<60:
         minutes=int(minutes)+t
     else:
         hour=int(hour)+1
         minutes=int(minutes)-60
-    heapq.heappush(bsave,[int(hour),int(minutes)])
-    return a,acount,asave,bsave
-def function_b(b,bcount,bsave,asave):
-    now_b=heapq.heappop(b)
-    start_hour,start_minutes=now_b[0].split(':')
-    start_hour=int(start_hour)
-    start_minutes=int(start_minutes)
-    if bsave:
-        if start_hour<bsave[0][0]:
-            bcount+=1
-        elif start_hour==bsave[0][0]:
-            if start_minutes<bsave[0][1]:
-                bcount+=1
-            else:
-                heapq.heappop(bsave)
-        else:
-            heapq.heappop(bsave)
-    else:
-        bcount+=1
-    hour, minutes=now_b[1].split(':')
-    if int(minutes)+t<60:
-        minutes=int(minutes)+t
-    else:
-        hour=int(hour)+1
-        minutes=int(minutes)-60
-    heapq.heappush(asave,[int(hour),int(minutes)])
-    return b,bcount,bsave,asave
+    heapq.heappush(op_save,[int(hour),int(minutes)])
+    return heap,count,save,op_save
 n=int(input())
 for v in range(n):
     a=[]
@@ -70,15 +45,15 @@ for v in range(n):
     while a or b:
         if a and b:
             if int("".join(list(a[0][0].split(':'))))>int("".join(list(b[0][0].split(':')))):
-                b,bcount,bsave,asave=function_b(b,bcount,bsave,asave)
-                a,acount,asave,bsave=function_a(a,acount,asave,bsave)
+                b,bcount,bsave,asave=f(b,bcount,bsave,asave)
+                a,acount,asave,bsave=f(a,acount,asave,bsave)
             else:
-                a,acount,asave,bsave=function_a(a,acount,asave,bsave)
-                b,bcount,bsave,asave=function_b(b,bcount,bsave,asave)
+                a,acount,asave,bsave=f(a,acount,asave,bsave)
+                b,bcount,bsave,asave=f(b,bcount,bsave,asave)
         elif a:
-            a,acount,asave,bsave=function_a(a,acount,asave,bsave)
+            a,acount,asave,bsave=f(a,acount,asave,bsave)
         elif b:
-            b,bcount,bsave,asave=function_b(b,bcount,bsave,asave)   
+            b,bcount,bsave,asave=f(b,bcount,bsave,asave)   
     print("Case #",end='')
     print(v+1,end='')
     print(": ",end='')
