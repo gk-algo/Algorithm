@@ -2,31 +2,32 @@ from collections import deque
 n,m=map(int,input().split())
 bank=n
 queue=deque()
-def deposit(price):
-    global bank
+def deposit(bank,price):
     bank+=price
-    if queue and queue[0]<=bank:
+    while queue and queue[0]<=bank:
         bank-=queue.popleft()
-def reservation(price):
-    global bank
-    if bank<price:
-        queue.append(price)
+    return bank
+
+def reservation(bank,price):
+    if not queue and price<=bank:
+        bank-=price
     else:
-        if queue:
-            queue.append(price)
-        elif bank>=price:
-          bank-=price
-def pay(price):
-    global bank
+        queue.append(price)
+    return bank
+
+def pay(bank,price):
     if bank>=price:
         bank-=price
+    return bank
+
 for _ in range(m):
     category,price=map(str,input().split())
     price=int(price)
+    
     if category=="deposit":
-        deposit(price)
+        bank=deposit(bank,price)
     elif category=="pay":
-        pay(price)
-    else:
-        reservation(price)
+        bank=pay(bank,price)
+    elif category=="reservation":
+        bank=reservation(bank,price)
 print(bank)
